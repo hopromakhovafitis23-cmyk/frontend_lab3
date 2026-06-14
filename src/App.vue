@@ -4,44 +4,31 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div>
+    <h2>Задача 1. Стани сторінки</h2>
+    
+    <div style="margin-bottom: 15px;">
+      <button @click="isLoading = !isLoading">Toggle loading</button>
+      <button @click="hasError = !hasError">Toggle error</button>
+      <button @click="items = []">Clear items</button>
+      <button @click="items = ['Елемент 1', 'Елемент 2']">Add sample items</button>
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <div style="border: 1px solid #ccc; padding: 10px;">
+      <p v-if="isLoading">Завантаження...</p>
+      <p v-else-if="hasError">Помилка завантаження</p>
+      <p v-else-if="items.length === 0">Немає даних</p>
+      <ul v-else>
+        <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import { ref } from 'vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+const isLoading = ref(false)
+const hasError = ref(false)
+const items = ref(['Елемент 1', 'Елемент 2'])
+</script>
