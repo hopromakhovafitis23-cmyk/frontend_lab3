@@ -1,7 +1,3 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
 
 <template>
   <div>
@@ -23,6 +19,24 @@ import TheWelcome from './components/TheWelcome.vue'
       </ul>
     </div>
   </div>
+
+  <div>
+    <h2>Задача 2. Приховування панелі (v-if vs v-show)</h2>
+    
+    <button @click="isPanelVisible = !isPanelVisible" style="margin-bottom: 15px;">
+      Показати/Сховати панель
+    </button>
+    
+    <div style="display: flex; gap: 20px;">
+      <div v-if="isPanelVisible" style="padding: 10px; background: #e3f2fd; border: 1px solid blue;">
+        <strong>v-if:</strong> Цей елемент повністю видаляється з DOM.
+      </div>
+      
+      <div v-show="isPanelVisible" style="padding: 10px; background: #f3e5f5; border: 1px solid purple;">
+        <strong>v-show:</strong> Цей елемент залишається в DOM (змінюється display).
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -31,4 +45,5 @@ import { ref } from 'vue'
 const isLoading = ref(false)
 const hasError = ref(false)
 const items = ref(['Елемент 1', 'Елемент 2'])
+const isPanelVisible = ref(true)
 </script>
