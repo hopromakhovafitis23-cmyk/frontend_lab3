@@ -37,6 +37,23 @@
       </div>
     </div>
   </div>
+  
+  <div>
+    <h2>Задача 3. Список карток і :key</h2>
+    
+    <button @click="addProduct" style="margin-bottom: 15px;">Додати товар</button>
+
+    <ul>
+      <li 
+        v-for="p in products" 
+        :key="p.id"
+        :style="{ backgroundColor: p.category === 'Електроніка' ? '#e0f7fa' : 'transparent', padding: '5px', marginBottom: '5px', border: '1px solid #ddd' }"
+      >
+        <strong>{{ p.title }}</strong> (Категорія: {{ p.category }})
+        <button @click="removeProduct(p.id)" style="margin-left: 10px;">Видалити</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>
@@ -46,4 +63,23 @@ const isLoading = ref(false)
 const hasError = ref(false)
 const items = ref(['Елемент 1', 'Елемент 2'])
 const isPanelVisible = ref(true)
+
+const products = ref([
+  { id: 1, title: 'Ноутбук', category: 'Електроніка' },
+  { id: 2, title: 'Стілець', category: 'Меблі' },
+  { id: 3, title: 'Смартфон', category: 'Електроніка' },
+  { id: 4, title: 'Футболка', category: 'Одяг' }
+])
+
+const addProduct = () => {
+  products.value.push({
+    id: Date.now(),
+    title: `Новий товар ${Math.floor(Math.random() * 100)}`,
+    category: 'Меблі'
+  })
+}
+
+const removeProduct = (id) => {
+  products.value = products.value.filter(p => p.id !== id)
+}
 </script>
